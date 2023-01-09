@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form >
+        <label for="name">Name:</label> <br>
+        <input type="text" id="name"> <br>
+        <label for="email">Email: </label> <br>
+        <input type="text" id="email"> <br>
+        <label for="salary">Salary:</label> <br>
+        <input type="number" id="salary"> <br>
+        <label for="city">City: </label> <br>
+        <input type="text" id="city"> <br>
+        <button id="submit" type ="button">submit</button>
+        
+    </form>
+    <div id="render"></div>
+
+    <script>
+        const Name = document.getElementById('name');
+        const Email = document.getElementById('email');
+        const Salary = document.getElementById('salary');
+        const City = document.getElementById('city');
+        const submit = document.getElementById('submit');
+        const render = document.getElementById('render');
+        let arr = 
+    [
+
+        
+        {
+            id :1,
+            name: 'John',
+            email:'johngmail',
+            city:'London',
+            salary: 2000,
+        },
+        {
+            id :2,
+            name:'Bob',
+            email:'bongmail',
+            city:'HaNoi',
+            salary: 2000,
+        }
+    ];
+    function Delete(idDelete)
+    {
+        arr = arr.filter((i) => i.id !== idDelete);
+        Render();
+    }
+    function Update(id)
+    {
+        document.getElementById("name" +id).disabled = false;
+        document.getElementById("email" + id    ).disabled = false;
+        document.getElementById("salary" + id   ).disabled = false;
+        document.getElementById("city" + id ).disabled = false;
+
+
+
+    }
+    
+    function Render()
+    {
+        render.innerHTML = '';
+        arr.forEach((item) => {
+            render.innerHTML = render.innerHTML + 
+            `
+            <div class = "number">
+                <p>${item.id} <br>
+                    <input type="text" id="name1" value = "${item.name}" disabled> <br>
+                    <input type="text" id="email1" value = "${item.email}" disabled> <br>
+                    <input type="number" id="salary1" value = "${item.salary}" disabled> <br>
+                    <input type="text" id="city1" value = "${item.city}" disabled> <br>
+                <button onclick ="Delete(${item.id})"> delete </button>
+            </div>
+            
+            `
+        })
+    }
+    
+    
+    
+    submit.addEventListener('click', () =>
+    {
+        let userInputName = Name.value, userInputEmail = Email.value,
+        userInputSalary = Salary.value, userInputCity = City.value;
+         arr.push({name: userInputName, email:userInputEmail, id: Date.now(), salary:userInputSalary, city:userInputCity })
+         Render();
+    }
+    )
+  
+    
+    
+    
+    </script>
+</body>
+</html>
